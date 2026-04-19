@@ -1,0 +1,20 @@
+# Dependencies — large, not source
+node_modules/
+
+# Build output — generated, not source
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+# Secrets — belt-and-suspenders (already in .gitignore)
+.env.local
+.env*.local
+
+# Generated test results — JSON data files, not logic
+scripts/results/
+
+# Lock file — 284KB, low signal for context
+package-lock.json
+
+# Session/tooling state
+.superpowers/
