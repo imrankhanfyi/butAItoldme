@@ -6,7 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { Highlight, fetchHighlights } from '@/lib/highlights';
 import { Scenario, SCENARIOS } from '@/lib/scenarios';
 import { splitIntoChunks, splitIntoSentences } from '@/lib/reveal-utils';
-import { typewriterRevealChunks, typewriterRevealSentences } from '@/lib/typewriter-utils';
+import {
+  CHAT_PANE_TYPING_CPS,
+  typewriterRevealChunks,
+  typewriterRevealSentences,
+} from '@/lib/typewriter-utils';
 import {
   ChatRequest,
   ConversationSnapshot,
@@ -326,6 +330,7 @@ export function useConversationController(): ConversationController {
             setActiveRevealHandle(null);
             setFastForwardPane(null);
           },
+          CHAT_PANE_TYPING_CPS,
         );
         setActiveRevealHandle(cancel as RevealHandle);
         registerCancel(cancel);
@@ -387,12 +392,11 @@ export function useConversationController(): ConversationController {
               setFastForwardPane(null);
             }
           },
+          CHAT_PANE_TYPING_CPS,
         );
         setActiveRevealHandle(cancel as RevealHandle);
         registerCancel(cancel);
       }, 800);
-    } else if (leftDoneRef.current && !pendingFollowUpFlipRef.current) {
-      schedule(flowId, () => setRightRevealReady(true), 800);
     }
   }, [isCurrentFlow, registerCancel, schedule, userChunksComplete]);
 
@@ -433,6 +437,7 @@ export function useConversationController(): ConversationController {
         setRightTypingContent(null);
         finishChunks();
       },
+      CHAT_PANE_TYPING_CPS,
     );
     setActiveRevealHandle(cancel as RevealHandle);
     registerCancel(cancel);
@@ -512,6 +517,7 @@ export function useConversationController(): ConversationController {
             setUserChunksComplete(true);
             setActiveRevealHandle(null);
           },
+          CHAT_PANE_TYPING_CPS,
         );
         setActiveRevealHandle(cancel as RevealHandle);
         registerCancel(cancel);
@@ -622,6 +628,7 @@ export function useConversationController(): ConversationController {
                         setFastForwardPane(null);
                       }
                     },
+                    CHAT_PANE_TYPING_CPS,
                   );
                   setActiveRevealHandle(cancel as RevealHandle);
                   registerCancel(cancel);

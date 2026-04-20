@@ -2,12 +2,15 @@ type OnUpdate = (displayedText: string) => void;
 type OnCommit = (text: string) => void;
 type CancelFn = (() => void) & { finishNow?: () => void };
 
+// 30 cps increased by 18% for the chat-pane reveal speed.
+export const CHAT_PANE_TYPING_CPS = 35.4;
+
 export function typewriterRevealSentences(
   sentences: string[],
   onUpdate: OnUpdate,
   onCommit: OnCommit,
   onDone?: () => void,
-  cps = 30,
+  cps = CHAT_PANE_TYPING_CPS,
   pauseAfterMs = 500,
 ): CancelFn {
   if (!sentences.length) { onDone?.(); return () => {}; }
@@ -110,7 +113,7 @@ export function typewriterRevealChunks(
   onUpdate: OnUpdate,
   onCommit: OnCommit,
   onDone?: () => void,
-  cps = 30,
+  cps = CHAT_PANE_TYPING_CPS,
   pauseAfterMs = 500,
 ): CancelFn {
   return typewriterRevealSentences(chunks, onUpdate, onCommit, onDone, cps, pauseAfterMs);

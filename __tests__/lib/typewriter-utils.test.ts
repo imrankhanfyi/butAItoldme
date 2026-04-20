@@ -1,5 +1,11 @@
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { typewriterRevealSentences, typewriterRevealChunks } from '@/lib/typewriter-utils';
+import {
+  CHAT_PANE_TYPING_CPS,
+  typewriterRevealSentences,
+  typewriterRevealChunks,
+} from '@/lib/typewriter-utils';
+
+const typingIntervalMs = Math.ceil(1000 / CHAT_PANE_TYPING_CPS);
 
 describe('typewriterRevealSentences', () => {
   beforeEach(() => { vi.useFakeTimers(); });
@@ -13,15 +19,15 @@ describe('typewriterRevealSentences', () => {
 
   it('types a single character on first tick', () => {
     const updates: string[] = [];
-    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {}, undefined, 30, 500);
-    vi.advanceTimersByTime(34);
+    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {});
+    vi.advanceTimersByTime(typingIntervalMs);
     expect(updates[0]).toBe('H');
   });
 
   it('updates display incrementally for a single sentence', () => {
     const updates: string[] = [];
-    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {}, undefined, 30, 500);
-    vi.advanceTimersByTime(34 * 3);
+    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {});
+    vi.advanceTimersByTime(typingIntervalMs * 3);
     expect(updates).toContain('H');
     expect(updates).toContain('Hi');
     expect(updates).toContain('Hi.');
@@ -30,8 +36,8 @@ describe('typewriterRevealSentences', () => {
   it('commits sentence after typing + pause, then calls onDone', () => {
     const commits: string[] = [];
     const onDone = vi.fn();
-    typewriterRevealSentences(['Hi.'], () => {}, (s) => commits.push(s), onDone, 30, 500);
-    // 3 chars at ~33ms each = ~99ms typing, then 500ms pause
+    typewriterRevealSentences(['Hi.'], () => {}, (s) => commits.push(s), onDone);
+    // 3 chars at the shared chat-pane interval, then 500ms pause
     vi.advanceTimersByTime(700);
     expect(commits).toEqual(['Hi.']);
     expect(onDone).toHaveBeenCalledOnce();
@@ -39,7 +45,7 @@ describe('typewriterRevealSentences', () => {
 
   it('clears display after committing a sentence', () => {
     const updates: string[] = [];
-    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {}, undefined, 30, 500);
+    typewriterRevealSentences(['Hi.'], (text) => updates.push(text), () => {});
     vi.advanceTimersByTime(700);
     // last update after commit should be empty string
     expect(updates[updates.length - 1]).toBe('');
@@ -47,18 +53,18 @@ describe('typewriterRevealSentences', () => {
 
   it('types multiple sentences in sequence', () => {
     const commits: string[] = [];
-    typewriterRevealSentences(['Hi.', 'Bye.'], () => {}, (s) => commits.push(s), undefined, 30, 500);
-    // first: ~99ms typing + 500ms pause = ~600ms
+    typewriterRevealSentences(['Hi.', 'Bye.'], () => {}, (s) => commits.push(s));
+    // first sentence typing + 500ms pause
     vi.advanceTimersByTime(700);
     expect(commits).toEqual(['Hi.']);
-    // second: ~132ms typing + 500ms pause = ~632ms more
+    // second sentence typing + 500ms pause
     vi.advanceTimersByTime(800);
     expect(commits).toEqual(['Hi.', 'Bye.']);
   });
 
   it('calls onDone once after all sentences finish', () => {
     const onDone = vi.fn();
-    typewriterRevealSentences(['Hi.', 'Bye.'], () => {}, () => {}, onDone, 30, 500);
+    typewriterRevealSentences(['Hi.', 'Bye.'], () => {}, () => {}, onDone);
     vi.advanceTimersByTime(2000);
     expect(onDone).toHaveBeenCalledOnce();
   });
@@ -70,9 +76,6 @@ describe('typewriterRevealSentences', () => {
       ['Hello world.'],
       (text) => updates.push(text),
       (s) => commits.push(s),
-      undefined,
-      30,
-      500,
     );
     vi.advanceTimersByTime(100);
     const countBefore = updates.length;
@@ -96,8 +99,8 @@ describe('typewriterRevealChunks', () => {
   it('types a single chunk character by character', () => {
     const updates: string[] = [];
     const commits: string[] = [];
-    typewriterRevealChunks(['Hey.'], (t) => updates.push(t), (s) => commits.push(s), undefined, 30, 500);
-    vi.advanceTimersByTime(34);
+    typewriterRevealChunks(['Hey.'], (t) => updates.push(t), (s) => commits.push(s));
+    vi.advanceTimersByTime(typingIntervalMs);
     expect(updates[0]).toBe('H');
     vi.advanceTimersByTime(700);
     expect(commits).toEqual(['Hey.']);
@@ -109,9 +112,6 @@ describe('typewriterRevealChunks', () => {
       ['Hey.', 'How are you?'],
       () => {},
       (s) => commits.push(s),
-      undefined,
-      30,
-      500,
     );
     vi.advanceTimersByTime(800);
     expect(commits).toEqual(['Hey.']);
@@ -121,7 +121,7 @@ describe('typewriterRevealChunks', () => {
 
   it('calls onDone after all chunks', () => {
     const onDone = vi.fn();
-    typewriterRevealChunks(['A.', 'B.'], () => {}, () => {}, onDone, 30, 500);
+    typewriterRevealChunks(['A.', 'B.'], () => {}, () => {}, onDone);
     vi.advanceTimersByTime(3000);
     expect(onDone).toHaveBeenCalledOnce();
   });
