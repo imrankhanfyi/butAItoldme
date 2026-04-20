@@ -4,7 +4,7 @@ import type { KeyboardEvent } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Highlight, fetchHighlights } from '@/lib/highlights';
-import { Scenario, SCENARIOS } from '@/lib/scenarios';
+import { Scenario } from '@/lib/scenarios';
 import { splitIntoChunks, splitIntoSentences } from '@/lib/reveal-utils';
 import {
   CHAT_PANE_TYPING_CPS,
@@ -24,32 +24,6 @@ const SNAPSHOT_VERSION = 1;
 
 type TypingRole = 'user' | 'assistant';
 type RevealHandle = (() => void) & { finishNow?: () => void };
-
-function readSnapshot(): ConversationSnapshot | null {
-  if (typeof window === 'undefined') return null;
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as ConversationSnapshot;
-    if (!parsed || parsed.version !== SNAPSHOT_VERSION) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function validateMessages(messages: unknown): Message[] {
-  if (!Array.isArray(messages)) return [];
-  return messages.filter((msg): msg is Message => {
-    return (
-      !!msg &&
-      typeof msg === 'object' &&
-      (msg as Message).role !== undefined &&
-      ((msg as Message).role === 'user' || (msg as Message).role === 'assistant') &&
-      typeof (msg as Message).content === 'string'
-    );
-  });
-}
 
 function buildSnapshot(args: {
   sessionId: string;
@@ -260,20 +234,14 @@ export function useConversationController(): ConversationController {
   }, []);
 
   useEffect(() => {
-    const snapshot = readSnapshot();
-    if (snapshot) {
-      setSessionId(snapshot.sessionId || uuidv4());
-      setModel(snapshot.model);
-      setUserMessages(validateMessages(snapshot.userMessages));
-      setMirrorMessages(validateMessages(snapshot.mirrorMessages));
-      setActiveTab(snapshot.activeTab);
-      setShowInputField(snapshot.showInputField);
-      setShowRevealCard(snapshot.showRevealCard);
-      const restoredScenario = SCENARIOS.find((scenario) => scenario.id === snapshot.activeScenarioId) ?? null;
-      setActiveScenario(restoredScenario);
-    } else {
-      setSessionId(uuidv4());
+    if (typeof window !== 'undefined') {
+      try {
+        window.localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        // ignore storage failures
+      }
     }
+    setSessionId(uuidv4());
     hydratedRef.current = true;
   }, []);
 
@@ -599,7 +567,11 @@ export function useConversationController(): ConversationController {
                 break;
               case 'left_done':
                 leftDoneRef.current = true;
-                if (userChunksCompleteRef.current && !pendingFollowUpFlipRef.current) {
+                if (
+                  userChunksCompleteRef.current &&
+                  !pendingFollowUpFlipRef.current &&
+                  !bChunksRef.current.length
+                ) {
                   schedule(flowId, () => setRightRevealReady(true), 800);
                 }
                 break;
