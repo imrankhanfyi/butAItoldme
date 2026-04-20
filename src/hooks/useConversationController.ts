@@ -3,7 +3,7 @@
 import type { KeyboardEvent } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Highlight, fetchHighlights } from '@/lib/highlights';
+import { CHAT_PANE_HIGHLIGHTS_ENABLED, Highlight, fetchHighlights } from '@/lib/highlights';
 import { Scenario } from '@/lib/scenarios';
 import { splitIntoChunks, splitIntoSentences } from '@/lib/reveal-utils';
 import {
@@ -418,7 +418,7 @@ export function useConversationController(): ConversationController {
   }, [rightChunksComplete, rightRevealReady, rightStreaming]);
 
   useEffect(() => {
-    if (!showRevealCard) return;
+    if (!CHAT_PANE_HIGHLIGHTS_ENABLED || !showRevealCard) return;
     const leftAI = userMessages.filter((message) => message.role === 'assistant').map((message) => message.content).join(' ');
     const rightAI = mirrorMessages.filter((message) => message.role === 'assistant').map((message) => message.content).join(' ');
     if (leftAI && rightAI) {

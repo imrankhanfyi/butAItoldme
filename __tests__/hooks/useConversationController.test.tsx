@@ -2,11 +2,17 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { useConversationController } from '@/hooks/useConversationController';
 
+vi.mock('@/lib/highlights', () => ({
+  CHAT_PANE_HIGHLIGHTS_ENABLED: false,
+  fetchHighlights: vi.fn(),
+}));
+
 const STORAGE_KEY = 'butaitoldme-state-v1';
 const originalLocalStorage = Object.getOwnPropertyDescriptor(window, 'localStorage');
 
 describe('useConversationController', () => {
   beforeEach(() => {
+    vi.clearAllMocks();
     const storage = {
       getItem: vi.fn((key: string) => (key === STORAGE_KEY ? '{"version":1}' : null)),
       setItem: vi.fn(),
@@ -19,6 +25,8 @@ describe('useConversationController', () => {
   });
 
   afterEach(() => {
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
     if (originalLocalStorage) {
       Object.defineProperty(window, 'localStorage', originalLocalStorage);
     }

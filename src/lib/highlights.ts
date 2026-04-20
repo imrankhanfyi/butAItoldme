@@ -3,6 +3,8 @@ export interface Highlight {
   text: string;
 }
 
+export const CHAT_PANE_HIGHLIGHTS_ENABLED = false;
+
 export async function fetchHighlights(
   leftResponse: string,
   rightResponse: string,
