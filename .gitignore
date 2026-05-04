@@ -3,6 +3,9 @@
 # local superpowers session data
 .superpowers/
 
+# symlink to sibling private research repo
+/_research
+
 # dependencies
 /node_modules
 /.pnp
