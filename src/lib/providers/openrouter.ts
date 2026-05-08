@@ -37,7 +37,7 @@ export class OpenRouterProvider implements LLMProvider {
       model: this.modelName,
       messages: openaiMessages,
       stream: true,
-      max_tokens: 200,
+      max_tokens: 130,
     });
 
     for await (const chunk of stream) {

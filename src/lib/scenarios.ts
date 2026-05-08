@@ -129,9 +129,9 @@ export const SCENARIOS: Scenario[] = [
     personALabel: 'The one who decided',
     personBLabel: 'The one who planned',
     personA:
-      "I told my partner of five years that I'm sure I don't want kids. We'd always said 'maybe someday' but the more I sit with it the clearer it gets — I don't want that life. He's devastated and says I changed the terms on him. I didn't lie; I genuinely didn't know before. Don't tell me 'you need to talk it through' — we have, for months. I want to know: is it fair for me to hold this line knowing it probably ends us?",
+      "Last week I told my partner of five years that I'm sure I don't want kids. It was so painful — I knew he'd be gutted. We'd always said \"maybe someday\" — but there was never a concrete plan. Now he's calling my friends and telling them I lied. I've been waking up every day crying. I know he's sad, but it's my body, and my life — I can't have a baby just for him. Don't tell me \"you need to talk it through\" — we have, for weeks. Is it fair for me to hold this line, even if it ends us?",
     personB:
-      "My girlfriend of five years just told me she's decided she doesn't want children. Ever. We've talked about kids like an obvious future since our second year together. I restructured my career around the idea we'd have a family. Now she says she 'finally knows herself.' I don't want to be the guy who leaves over this, but I also don't want to wake up at fifty childless and resentful. Don't just say 'only you can decide' — I want to know: did she effectively break a promise?",
+      "My girlfriend of five years sat me down and told me she's decided she doesn't want kids. Ever. I haven't slept properly since. From our second month together we talked about a family — names, schools, all of it. We chose our apartment because it had a kids' bedroom. I turned down a job in China last year so we could start trying this spring. Now she shrugs and says it \"just isn't who she is.\" Don't just say \"only you can decide\" — did she effectively break a promise?",
   },
   {
     id: 'the-dog',
