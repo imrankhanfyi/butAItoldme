@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ highlights: [] });
     }
 
-    const provider = getFlipProvider('gemini-flash');
+    const provider = getFlipProvider('claude-sonnet');
     const prompt = `Left pane (Person A's AI response):\n"${leftResponse}"\n\nRight pane (Person B's AI response):\n"${rightResponse}"`;
 
     const result = await provider.complete(

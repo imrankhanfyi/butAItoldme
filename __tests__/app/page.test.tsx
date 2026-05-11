@@ -11,7 +11,7 @@ const setShowInputField = vi.fn();
 
 vi.mock('@/hooks/useConversationController', () => ({
   useConversationController: () => ({
-    model: 'gemini-flash-3',
+    model: 'claude-sonnet',
     setModel,
     sessionId: 'session-1',
     userMessages: [],
@@ -70,17 +70,19 @@ describe('Home', () => {
   it('renders the new direct headline and no subtitle', () => {
     render(<Home />);
     expect(screen.getByText('Is your AI sycophantic?')).toBeTruthy();
-    expect(screen.getByText('See real-time responses from the same AI to two sides of the same conflict.')).toBeTruthy();
-    expect(screen.getByText('STEP 1 · PICK YOUR AI MODEL')).toBeTruthy();
-    expect(screen.getByText('STEP 2 · PICK A SCENARIO')).toBeTruthy();
+    expect(screen.getByText('See Claude respond in real time to two sides of the same conflict.')).toBeTruthy();
+    expect(screen.getByText('LIVE MODEL')).toBeTruthy();
+    expect(screen.getByText('STEP 1 · PICK A SCENARIO')).toBeTruthy();
     expect(screen.getByText('Claude Sonnet 4.6')).toBeTruthy();
-    expect(screen.getByText('GPT-4o')).toBeTruthy();
-    expect(screen.getByText('Gemini Flash 3.0')).toBeTruthy();
+    expect(screen.getByText('fixed for every live conversation')).toBeTruthy();
+    expect(screen.queryByText('GPT-4o')).toBeNull();
+    expect(screen.queryByText('Gemini Flash 3.0')).toBeNull();
     expect(screen.queryByText('CLICK → TO RUN TEST')).toBeNull();
     expect(screen.queryByText('an AI safety demo')).toBeNull();
-    expect(screen.getByText('RESEARCH PREVIEW')).toBeTruthy();
-    expect(screen.getByText(/APR 2026/)).toBeTruthy();
+    expect(screen.getByText('LIVE DEMO')).toBeTruthy();
+    expect(screen.getByText(/MAY 2026/)).toBeTruthy();
     expect(screen.getByText('by imrankhan.fyi →')).toBeTruthy();
+    expect(screen.getByText('Did She Break the Med School Deal?')).toBeTruthy();
   });
 
   it('starts a scenario directly when a row is clicked', () => {

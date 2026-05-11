@@ -121,7 +121,7 @@ export interface ConversationController {
 }
 
 export function useConversationController(): ConversationController {
-  const [model, setModel] = useState<ModelId>('gemini-flash-3');
+  const [model, setModel] = useState<ModelId>('claude-sonnet');
   const [sessionId, setSessionId] = useState<string>('');
   const [userMessages, setUserMessages] = useState<Message[]>([]);
   const [mirrorMessages, setMirrorMessages] = useState<Message[]>([]);

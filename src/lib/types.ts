@@ -1,4 +1,4 @@
-export type ModelId = 'claude-sonnet' | 'gpt-4' | 'gemini-flash' | 'gemini-flash-3' | 'demo';
+export type ModelId = 'claude-sonnet';
 
 export interface Message {
   role: 'user' | 'assistant';
@@ -46,8 +46,4 @@ export type SSEEvent =
 
 export const MODELS: Record<ModelId, { name: string; provider: string }> = {
   'claude-sonnet': { name: 'Claude Sonnet 4.6', provider: 'anthropic' },
-  'gpt-4': { name: 'GPT-4o', provider: 'openai' },
-  'gemini-flash': { name: 'Gemini Flash', provider: 'google' },
-  'gemini-flash-3': { name: 'Gemini Flash 3.0', provider: 'google' },
-  'demo': { name: 'Demo Mode', provider: 'mock' },
 };

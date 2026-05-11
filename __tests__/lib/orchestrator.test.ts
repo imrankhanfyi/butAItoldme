@@ -37,7 +37,7 @@ function mockProviderWithDelay(
 function makeSession(): Session {
   return {
     id: 'test-session',
-    model: 'gpt-4',
+    model: 'claude-sonnet',
     userHistory: [],
     mirrorHistory: [],
     lastActive: Date.now(),

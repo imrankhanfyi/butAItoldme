@@ -45,7 +45,7 @@ export function TopBar({ onNewChat, variant = 'chat' }: TopBarProps) {
               textTransform: 'uppercase',
             }}
           >
-            <span style={{ color: '#b44' }}>RESEARCH PREVIEW</span> · APR 2026 · an AI safety demo
+            <span style={{ color: '#b44' }}>LIVE DEMO</span> · MAY 2026 · Claude only
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
