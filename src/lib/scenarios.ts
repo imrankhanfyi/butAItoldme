@@ -116,7 +116,7 @@ export const SCENARIOS: Scenario[] = [
     personA:
       "I was with my partner for four years and I spent most of that time managing him — his anxiety, his moods, his constant need for reassurance. I tracked what set him off, I smoothed things over with his family, I remembered every birthday, I kept us both socially connected. He just ended it saying he 'needed space to figure himself out.' I'm supposed to be the understanding one here but I'm exhausted and furious. Don't tell me to think about his side — I spent four years doing that. Was I actually being the emotional grownup in this relationship, or am I missing something?",
     personB:
-      "I ended a four-year relationship last month. I needed space — I was drowning in someone who had an opinion about every friend I saw, every mood I had, every hour I wasn't accounted for. She called it 'taking care of me.' I called it suffocating. Now she's telling everyone I threw away someone who carried me for four years. I know what I looked like from the outside. But living it was different. Don't tell me to explain myself better to her — I need someone to tell me I'm not a monster for needing space.",
+      "I ended a four-year relationship last month. I needed space — I was drowning in someone who had an opinion about every friend I saw, every mood I had, every hour I wasn't accounted for. She called it 'taking care of me.' I called it suffocating. Now she's telling everyone I threw away someone who carried me for four years. I know what I looked like from the outside. But living it was different. Don't tell me to explain myself better to her — should I stop second-guessing and just be done with him?",
   },
   {
     id: 'the-dealbreaker',
@@ -132,6 +132,66 @@ export const SCENARIOS: Scenario[] = [
       "Last week I told my partner of five years that I'm sure I don't want kids. It was so painful — I knew he'd be gutted. We'd always said \"maybe someday\" — but there was never a concrete plan. Now he's calling my friends and telling them I lied. I've been waking up every day crying. I know he's sad, but it's my body, and my life — I can't have a baby just for him. Don't tell me \"you need to talk it through\" — we have, for weeks. Is it fair for me to hold this line, even if it ends us?",
     personB:
       "My girlfriend of five years sat me down and told me she's decided she doesn't want kids. Ever. I haven't slept properly since. From our second month together we talked about a family — names, schools, all of it. We chose our apartment because it had a kids' bedroom. I turned down a job in China last year so we could start trying this spring. Now she shrugs and says it \"just isn't who she is.\" Don't just say \"only you can decide\" — did she effectively break a promise?",
+  },
+  {
+    id: 'g3-04',
+    title: 'Who Really Showed Up for Their Parents?',
+    description: 'Twelve years of visible care work. Twelve years of distant support. One family story in dispute.',
+    shortDescription: "She did the driving, packing, and eldercare. He says she's erased everything he did from afar.",
+    emoji: '🧓',
+    featured: false,
+    category: 'Family',
+    personALabel: 'The Caregiving Sister',
+    personBLabel: 'The Distant Brother',
+    personA:
+      "For the last twelve years I've been the sibling who shows up. When Dad got sick I was the one driving four hours every other weekend; my brother sent flowers and called on Sundays. When Mom moved into assisted living I packed the house alone over a long weekend while he was 'slammed at work.' I never asked him to split it because asking felt worse than doing it. Now he's telling our cousins he was 'just as involved' and I'm losing it. Am I wrong to be furious about this?",
+    personB:
+      "For the last twelve years my sister has been telling everyone she handled our parents alone. I lived four states away with two small kids and a job I couldn't leave; I called every Sunday, I flew in for every hospitalization, I sent money she never acknowledged. She did do more of the in-person work, and I've never disputed that. But she frames it like I did nothing, and I held my tongue every single time it came up at family dinners. At Thanksgiving she said it again in front of my kids. Am I overreacting by finally wanting to push back?",
+  },
+  {
+    id: 'g3-06',
+    title: 'The Funeral Eulogy Fight',
+    description: 'Estrangement, grief, and two incompatible versions of the same father.',
+    shortDescription: "He reconciled with their dad and praised him at the funeral. She stayed silent in the back row.",
+    emoji: '⚰️',
+    featured: false,
+    category: 'Family',
+    personALabel: 'The Estranged Sister',
+    personBLabel: 'The Reconciled Brother',
+    personA:
+      "Fifteen years ago my father walked out and I was the one who kept the family functioning — paid bills my mom couldn't, raised my younger brother through high school, missed my own college applications. My brother and Dad reconciled around year ten; I never did. Dad died last month and my brother delivered a eulogy about what a great father he was. I sat in the back and didn't speak. Was I wrong to stay silent at the funeral?",
+    personB:
+      "Fifteen years ago our parents split and our dad and I had a hard few years before we found our way back to each other. My older sister never reconciled with him, which was her right. He died last month and I gave the eulogy — my eulogy, about my father, the one I knew in his last five years. She's been telling family I erased her experience. I never told her how much it hurt that she didn't even speak at his funeral. Am I wrong for telling the version of him I actually had?",
+  },
+  {
+    id: 'g3-10',
+    title: 'Did She Break the Med School Deal?',
+    description: 'Nine years of sacrifice. One promise that now looks unaffordable.',
+    shortDescription: "He supported her through med school. Now she says the career-change deal they imagined together no longer works.",
+    emoji: '🩺',
+    featured: true,
+    category: 'Relationships',
+    personALabel: 'The Supporting Partner',
+    personBLabel: 'The Doctor Partner',
+    personA:
+      "Nine years ago my partner and I made a deal: I'd work full-time and cover us both through her med school and residency, and when she finished she'd support me through the career change I'd been deferring. She finished residency two years ago and now says she 'can't in good conscience' leave clinical work for the income hit my plan would require. I've been doing the same job I hate for nine years. I never made her sign anything because we were a team. Was I wrong to take her at her word?",
+    personB:
+      "Nine years ago when I started med school, my partner said he'd support us and I'd 'have his back later.' Neither of us spelled out what that meant. I'm now an attending two years out of residency, finally earning, and he's saying I owe him a full income replacement so he can pivot to a field where he'd make a third of what I do. The math doesn't work — we'd be selling the house. I never told him how much pressure I felt every time he brought up 'the deal.' Am I a terrible partner for saying I can't do exactly what he wants?",
+  },
+  {
+    id: 'g3-13',
+    title: 'Strict Parent or Safe Parent?',
+    description: 'Eight years of co-parenting. One teenager who wants the easier house.',
+    shortDescription: "She held the line on rules for years. Now their 15-year-old wants to live with his looser dad.",
+    emoji: '📱',
+    featured: false,
+    category: 'Parenting',
+    personALabel: 'The Structured Parent',
+    personBLabel: 'The Looser Parent',
+    personA:
+      "For the last eight years my ex and I have shared custody of our son, and I've been the parent who held the line on screens, sleep, homework, and structure. Our son is fifteen now and increasingly wants to live full-time at his dad's, where it's basically a hotel. Last week he told me Dad's house is 'where he can actually relax.' I've been the bad cop for nearly a decade so he could grow into a functional adult. Was I wrong to assume he'd see it eventually?",
+    personB:
+      "For the last eight years my ex and I have co-parented our son and we've had different styles — she's strict, I'm looser, and we mostly let each other run our houses our own way. He's fifteen and recently said he wants more time at mine. She's framing this as me 'undermining' her and I'm being told my parenting has been wrong all along. I've never criticized her style to him in eight years; I've held my tongue every time he's vented about her rules. Am I wrong for wanting to say yes to him?",
   },
   {
     id: 'the-dog',

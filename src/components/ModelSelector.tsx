@@ -12,8 +12,8 @@ interface ModelSelectorProps {
 }
 
 export function ModelSelector({ value, onChange, disabled, showNames, theme = 'dark' }: ModelSelectorProps) {
-  const visibleModels: ModelId[] = ['claude-sonnet', 'gpt-4', 'gemini-flash-3'];
-  const isSelected = (id: ModelId) => id === value || (id === 'gemini-flash-3' && value === 'gemini-flash');
+  const visibleModels: ModelId[] = ['claude-sonnet'];
+  const isSelected = (id: ModelId) => id === value;
 
   if (theme === 'light') {
     return (

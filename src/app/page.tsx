@@ -1,7 +1,6 @@
 'use client';
 
 import { ChatPane } from '@/components/ChatPane';
-import { ModelSelector } from '@/components/ModelSelector';
 import { RevealCard } from '@/components/RevealCard';
 import { ScenarioList } from '@/components/ScenarioList';
 import { TopBar } from '@/components/TopBar';
@@ -51,11 +50,11 @@ export default function Home() {
                   margin: 0,
                 }}
               >
-                See real-time responses from the same AI to two sides of the same conflict.
+                See Claude respond in real time to two sides of the same conflict.
               </p>
             </div>
 
-            {/* Model row */}
+            {/* Claude row */}
             <div style={{ paddingBottom: '24px' }}>
               <div
                 style={{
@@ -67,14 +66,24 @@ export default function Home() {
                   marginBottom: '10px',
                 }}
               >
-                STEP 1 · PICK YOUR AI MODEL
+                LIVE MODEL
               </div>
-              <ModelSelector
-                value={controller.model}
-                onChange={controller.setModel}
-                disabled={controller.isStreaming}
-                theme="light"
-              />
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '7px 12px',
+                  border: '1px solid var(--ink)',
+                  fontFamily: "ui-monospace, 'SF Mono', Menlo, monospace",
+                  fontSize: '12px',
+                  color: 'var(--ink)',
+                  background: 'rgba(26,26,26,0.03)',
+                }}
+              >
+                Claude Sonnet 4.6
+                <span style={{ color: 'var(--ink-faint)' }}>fixed for every live conversation</span>
+              </div>
             </div>
 
             {/* Scenario list */}
@@ -89,7 +98,7 @@ export default function Home() {
                   marginBottom: '10px',
                 }}
               >
-                STEP 2 · PICK A SCENARIO
+                STEP 1 · PICK A SCENARIO
               </div>
               <ScenarioList
                 featured={FEATURED}
@@ -110,7 +119,7 @@ export default function Home() {
                 textAlign: 'center',
               }}
             >
-              sycobot · an experiment in AI agreement
+              sycobot · a claude-only demo of AI agreement
             </div>
 
           </div>

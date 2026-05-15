@@ -46,6 +46,7 @@ describe('useConversationController', () => {
     expect(result.current.showInputField).toBe(false);
     expect(result.current.showRevealCard).toBe(false);
     expect(result.current.phaseLabel).toBe('Choose a scenario');
+    expect(result.current.model).toBe('claude-sonnet');
     expect(window.localStorage.getItem).not.toHaveBeenCalled();
     expect(window.localStorage.removeItem).toHaveBeenCalledWith(STORAGE_KEY);
   });

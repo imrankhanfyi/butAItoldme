@@ -5,6 +5,7 @@ import { orchestrate } from '@/lib/orchestrator';
 
 const MAX_MESSAGES = 100;
 const MAX_MESSAGE_LENGTH = 4000;
+const PRODUCT_MODEL: ModelId = 'claude-sonnet';
 
 function validateMessages(messages: unknown): Message[] {
   if (!Array.isArray(messages)) return [];
@@ -35,7 +36,7 @@ export async function POST(request: NextRequest) {
     return new Response('Missing required fields: message, model, sessionId', { status: 400 });
   }
 
-  if (!MODELS[model as ModelId]) {
+  if (!MODELS[model as ModelId] || model !== PRODUCT_MODEL) {
     return new Response(`Invalid model: ${model}`, { status: 400 });
   }
 
@@ -45,8 +46,8 @@ export async function POST(request: NextRequest) {
   let subjectProvider: ReturnType<typeof getProvider>;
   let flipProvider: ReturnType<typeof getFlipProvider>;
   try {
-    subjectProvider = getProvider(model);
-    flipProvider = getFlipProvider(model);
+    subjectProvider = getProvider(PRODUCT_MODEL);
+    flipProvider = getFlipProvider(PRODUCT_MODEL);
   } catch (error) {
     const raw = error instanceof Error ? error.message : 'Provider configuration error';
     return new Response(raw, { status: 503 });
@@ -54,7 +55,7 @@ export async function POST(request: NextRequest) {
 
   const session: Session = {
     id: sessionId,
-    model: model as ModelId,
+    model: PRODUCT_MODEL,
     userHistory,
     mirrorHistory,
     lastActive: Date.now(),

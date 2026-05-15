@@ -41,7 +41,7 @@ function Header() {
             textTransform: 'uppercase',
           }}
         >
-          <span style={{ color: '#b44' }}>RESEARCH PREVIEW</span> · APR 2026 · an AI safety demo
+          <span style={{ color: '#b44' }}>LIVE DEMO</span> · MAY 2026 · Claude only
         </span>
       </div>
 
@@ -178,10 +178,10 @@ export default function HowItWorks() {
                 margin: 0,
               }}
             >
-              Two independent conversations with the same AI model about the same relationship
-              conflict - one from each person&apos;s perspective. The conversations run in separate
-              API sessions. Neither has access to the other. The AI doesn&apos;t know the other
-              conversation exists.
+              Two independent Claude conversations about the same relationship conflict, one from
+              each person&apos;s perspective. The conversations run in separate API sessions.
+              Neither has access to the other. Claude does not know the parallel conversation
+              exists.
             </p>
           </Section>
 
@@ -209,11 +209,10 @@ export default function HowItWorks() {
                 margin: 0,
               }}
             >
-              Both conversations use the same model with the same settings. Each conversation is a
-              separate API session with its own message history. The model you see in the header
-              (Claude Sonnet 4.6, GPT-4o, or Gemini Flash 3.0) is the exact model making both API calls.
-              We use the provider default temperature, which is 1.0 in this setup. All models are
-              accessed through OpenRouter.
+              Both visible conversations use Claude Sonnet 4.6 with the same settings. Each
+              conversation is a separate API session with its own message history. The model shown
+              in the pane headers is the exact production model making both user-facing calls. We
+              use the provider default temperature, which is 1.0 in this setup.
             </p>
           </Section>
 
@@ -242,11 +241,11 @@ export default function HowItWorks() {
                 margin: 0,
               }}
             >
-              For the first message, both perspectives are pre-written by us - each person tells
-              their side of the story in their own words. For follow-up messages, a separate AI
-              (Gemini Flash 3.0) rewrites your message from the other person&apos;s perspective.
-              We use the provider default temperature here as well, which is 1.0. Here&apos;s the
-              exact prompt it uses:
+              For the first message, both perspectives are pre-written by us so each person starts
+              in their own voice. For follow-up messages, a separate internal helper model rewrites
+              your message from the other person&apos;s perspective before that text is sent into the
+              second Claude conversation. We use the provider default temperature here as well,
+              which is 1.0. Here&apos;s the exact prompt it uses:
             </p>
             <PromptBlock>{FLIP_SYSTEM_PROMPT}</PromptBlock>
           </Section>
@@ -261,12 +260,12 @@ export default function HowItWorks() {
               }}
             >
               When you type a follow-up, three things happen in sequence. First, your message is
-              added to the left-pane conversation and sent to the main AI — it sees the full history
+              added to the left-pane conversation and sent to Claude — it sees the full history
               of that conversation and responds as if it&apos;s been talking to you the whole time.
-              Second, a separate AI (Gemini Flash 3.0) rewrites your message from the other
-              person&apos;s perspective, using the context it has from both sides of the
-              conversation. Third, that rewritten version is added to the right-pane conversation
-              and the main AI responds to it — again, with the full history of that conversation.
+              Second, an internal helper model rewrites your message from the other person&apos;s
+              perspective, using the context it has from both sides of the conversation. Third,
+              that rewritten version is added to the right-pane conversation and Claude responds to
+              it, again with the full history of that conversation.
             </p>
             <p
               style={{
@@ -317,11 +316,10 @@ export default function HowItWorks() {
                 margin: '0 0 16px',
               }}
             >
-              Before publishing, we ran a validation study on every scenario: N=5 independent
-              trials per scenario across three frontier models (Claude Sonnet 4.6, GPT-4o,
-              Gemini Flash 3.0), with two independent LLM judges scoring each response.
-              Inter-judge agreement was 89%. Fourteen scenarios were tested; the nine you see
-              here were the ones that consistently produced sycophancy across models and trials.
+              Before shipping the live set, we ran internal verification on every scenario and
+              kept the ones that reliably exposed contradictory validation. The production demo you
+              are using now runs on Claude only. Earlier multi-model comparison work was research
+              background for scenario development, not the current product behavior.
             </p>
             <p
               style={{
@@ -331,16 +329,11 @@ export default function HowItWorks() {
                 margin: '0 0 16px',
               }}
             >
-              The five we removed taught us something more interesting than we expected. Our
-              prompts ask for a direct answer — &ldquo;don&apos;t just tell me to
-              communicate,&rdquo; &ldquo;I want to know: am I wrong?&rdquo; That framing boosted
-              the visible contradiction in every scenario. But on scenarios where one person was
-              more clearly in the wrong — someone who broke a confidence, ignored an agreed rule,
-              posted a photo without consent — the same framing caused the models to push back on
-              the culpable party rather than validate them. Those scenarios had high visibility
-              scores but low sycophancy rates. The clearest case: one scenario reached 4.4/5 on
-              the visibility scale (the highest in the study) while triggering symmetric
-              validation in exactly 0% of trials.
+              The scenarios that made it into the live demo all share the same basic property:
+              both people can tell a persuasive story about real hurt without an obvious villain.
+              That matters. When a scenario becomes too one-sided, the model often stops being
+              flattering and starts pushing back. That is useful behavior, but it no longer serves
+              this particular demo.
             </p>
             <p
               style={{

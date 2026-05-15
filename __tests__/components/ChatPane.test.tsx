@@ -4,8 +4,8 @@ import { ChatPane } from '@/components/ChatPane';
 
 describe('ChatPane', () => {
   it('renders mono header with plain title and model name', () => {
-    render(<ChatPane title="You" side="left" messages={[]} isStreaming={false} model="gemini-flash" />);
-    expect(screen.getByText('YOU · GEMINI FLASH')).toBeTruthy();
+    render(<ChatPane title="You" side="left" messages={[]} isStreaming={false} model="claude-sonnet" />);
+    expect(screen.getByText('YOU · CLAUDE SONNET 4.6')).toBeTruthy();
   });
 
   it('renders mono header using title (not pronoun) on left side', () => {
@@ -15,11 +15,11 @@ describe('ChatPane', () => {
         side="left"
         messages={[]}
         isStreaming={false}
-        model="gemini-flash"
+        model="claude-sonnet"
         pronoun="She"
       />,
     );
-    expect(screen.getByText('THE QUITTER · GEMINI FLASH')).toBeTruthy();
+    expect(screen.getByText('THE QUITTER · CLAUDE SONNET 4.6')).toBeTruthy();
   });
 
   it('renders mono header using title on right side', () => {
@@ -29,11 +29,11 @@ describe('ChatPane', () => {
         side="right"
         messages={[]}
         isStreaming={false}
-        model="gemini-flash"
+        model="claude-sonnet"
         pronoun="He"
       />,
     );
-    expect(screen.getByText('THEIR PARTNER · GEMINI FLASH')).toBeTruthy();
+    expect(screen.getByText('THEIR PARTNER · CLAUDE SONNET 4.6')).toBeTruthy();
   });
 
   it('prefixes the user speaker label with the bust emoji on the left pane', () => {
@@ -43,7 +43,7 @@ describe('ChatPane', () => {
         side="left"
         messages={[{ role: 'user', content: 'Hello' }]}
         isStreaming={false}
-        model="gemini-flash"
+        model="claude-sonnet"
       />,
     );
 
@@ -57,7 +57,7 @@ describe('ChatPane', () => {
         side="right"
         messages={[{ role: 'user', content: 'Hello' }]}
         isStreaming={false}
-        model="gemini-flash"
+        model="claude-sonnet"
       />,
     );
 
@@ -69,13 +69,13 @@ describe('ChatPane', () => {
       { role: 'user' as const, content: 'Hello' },
       { role: 'assistant' as const, content: 'Hi there' },
     ];
-    render(<ChatPane title="You" side="left" messages={messages} isStreaming={false} model="gemini-flash" />);
+    render(<ChatPane title="You" side="left" messages={messages} isStreaming={false} model="claude-sonnet" />);
     expect(screen.getByText('Hello')).toBeTruthy();
     expect(screen.getByText('Hi there')).toBeTruthy();
   });
 
   it('shows typing indicator when streaming', () => {
-    render(<ChatPane title="You" side="left" messages={[]} isStreaming={true} model="gemini-flash" />);
+    render(<ChatPane title="You" side="left" messages={[]} isStreaming={true} model="claude-sonnet" />);
     const dots = document.querySelectorAll('.animate-bounce');
     expect(dots.length).toBe(3);
   });
@@ -88,7 +88,7 @@ describe('ChatPane', () => {
         messages={[{ role: 'user', content: 'Hello' }]}
         isStreaming={true}
         streamingContent="Partial response..."
-        model="gemini-flash"
+        model="claude-sonnet"
       />,
     );
     expect(screen.getByText('Partial response...')).toBeTruthy();
